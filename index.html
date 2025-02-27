@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello, World!</title>
+    <script type="text/javascript" charset="utf-8">
+      let displayTime;
+      let[h,m,s,ms] = [0,0,0,0];
+      let timer = null;
+      let startTime;
+      let ellapsedTime=0;
+      function display() {
+      const currentTime = Date.now();
+
+            ellapsedTime  = currentTime - startTime;
+            ms = ellapsedTime % 1000;
+            totalSeconds  = Math.floor(ellapsedTime/1000);
+            s = totalSeconds %60;
+            m = Math.floor(totalSeconds/60) % 60;
+            h = Math.floor(totalSeconds/3600);
+
+            displayTime.innerHTML = `${h.toString().padStart(2,0)}:${m.toString().padStart(2,0)}: ${s.toString().padStart(2,0)}:${ms.toString().padStart(3,0)}`
+      }
+      
+      function startWatch (){
+      const currentTime = Date.now();
+
+          if(timer){
+            clearInterval(timer);
+          }
+          startTime = currentTime-ellapsedTime
+          timer =  setInterval(display, 1)
+      }
+        function stopWatch (){
+        clearInterval(timer);
+      }
+      
+      function resetWatch(){
+        clearInterval(timer);
+        timer=null;
+        ellapsedTime=0
+        displayTime.innerHTML = "00:00:00:000";
+      }
+
+      window.onload= ()=>{
+        displayTime = document.getElementById("displayTime");
+        stopButton = document.getElementById("stopButton");
+        startButton = document.getElementById("startButton");
+      }
+    </script>
+  </head>
+  <body>
+      <div>
+        <h1 id="displayTime">00:00:00:000</h1>
+      </div>
+      <div>
+        <button type="submit" id="startButton" onclick="startWatch()">start</button>
+        <button type="submit" id="stopButton" onclick="stopWatch()">stop</button>
+        <button type="submit" id="resetButton" onclick="resetWatch()">reset</button>
+        
+      </div>
+  </body>
+</html>
