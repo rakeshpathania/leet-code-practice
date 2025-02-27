@@ -388,7 +388,8 @@ const employees = [
     }
   });
   
-  console.log(departmentGroups);
+  console.log(JSON.stringify(departmentGroups, null, 2));
+  
   
   
 
