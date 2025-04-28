@@ -295,18 +295,18 @@ console.log(flattenAndSort(nestedArray));
 
 // console.log(isContainsWholeVowels)
 
-// const unsortedArray = [1,2,[3,4,[5,6,7,[8,[9,10]]]]];
+const unsortedArray = [1,2,[3,4,[5,6,7,[8,[9,10]]]]];
 
-// const flattenSortedArray = (array)=>{
-//     return array.reduce((acc, curr)=>{
-//         if(Array.isArray(curr)){
-//             acc.push(...flattenSortedArray(curr))
-//         }else{
-//             acc.push(curr)
-//         }
-// return acc;
-//     },[]).sort((a,b)=> a-b)
-// }
+const flattenSortedArray = (array)=>{
+    return array.reduce((acc, curr)=>{
+        if(Array.isArray(curr)){
+            acc.push(...flattenSortedArray(curr))
+        }else{
+            acc.push(curr)
+        }
+return acc;
+    },[]).sort((a,b)=> a-b)
+}
 
 // console.log(flattenSortedArray(unsortedArray))
 
@@ -330,43 +330,43 @@ console.log(flattenAndSort(nestedArray));
 // console.log(generateFabonacciSeries(10));
 
 
-// const fabonacciSeries = (n)=>{
-//     if(n<=0) return [];
-//     if(n===1) return [0];
+const fabonacciSeries = (n)=>{
+    if(n<=0) return [];
+    if(n===1) return [0];
     
-//     const fab = [0,1];
+    const fab = [0,1];
     
-//     for(i=2; i<n; i++){
-//         fab.push(fab[i-1]+fab[i-2])
-//     }
+    for(i=2; i<n; i++){
+        fab.push(fab[i-1]+fab[i-2])
+    }
     
-//     return fab;
+    return fab;
     
-// }
+}
 
-// console.log(fabonacciSeries(10))
-
-
-// let arr = [
-//     {name: "abc", score: 10},
-//     {name: "def", scorxe: 11},
-//     {name: "asdf", score: 10},
-//     {name: "asd", score: 14},
-//     {name: "bcd", score: 11}
-//   ];
-//   const newArray = [];
-//   arr.forEach((item)=>{
-//      const isExisting = newArray.find((newItem)=> newItem.score === item.score)
-//      if(isExisting){
-//          isExisting.name.push(item.name)
-//      }
-//      else{
-//          newArray.push({score: item.score, name:[item.name]})
-//      }
-//   })
-//   console.log(newArray)
+console.log(fabonacciSeries(10))
 
 
+let arr = [
+    {name: "abc", score: 10},
+    {name: "def", scorxe: 11},
+    {name: "asdf", score: 10},
+    {name: "asd", score: 14},
+    {name: "bcd", score: 11}
+  ];
+  const newArray = [];
+  arr.forEach((item)=>{
+     const isExisting = newArray.find((newItem)=> newItem.score === item.score)
+     if(isExisting){
+         isExisting.name.push(item.name)
+     }
+     else{
+         newArray.push({score: item.score, name:[item.name]})
+     }
+  })
+  console.log(newArray)
+
+// grouping according to the departments
 const employees = [
     { name: "John", age: 30, department: "Sales" },
     { name: "Emily", age: 28, department: "Marketing" },
@@ -389,8 +389,105 @@ const employees = [
   });
   
   console.log(JSON.stringify(departmentGroups, null, 2));
+
+
+// second method 
+const array = [
+    { name: "rakesh", department: "Sales" },
+    { name: "pathania", department: "Sales" },
+    { name: "abc", department: "development" }
+];
+
+const grouped = array.reduce((acc, user) => {
+    if (!acc[user.department]) {
+        acc[user.department] = [];
+    }
+    acc[user.department].push(user);
+    return acc;
+}, {});
+
+console.log(grouped);
+
   
+//get the first non-repeated element like w
+const string = 'swiss'
+let output;
+for (const char of string) {
+    if(string.indexOf(char) === string.lastIndexOf(char)){
+        output = char;
+        break;
+    }
+}
+
+console.log(output)
+
+//reverse string without using any inbuilt function 
+// const strings = 'rakesh';
+
+// let reverse='';
+// for(let i = string.length - 1; i >= 0 ; i--){
+//     reverse+= string[i]
+// }
+
+// console.log(reverse)
+
+
+// flatmap
+
+// const array = [
+//     {name: "rakesh", list: [1,2]},
+//     {name: "pathania", list: [3,4,5]},
+//     ]
+    
+    
+// const newArray = array.flatMap((user)=> user.list);
+
+// console.log(newArray)
+
+
+
+const unflattenedArray = [1,2,[3,4,5,6,[7,8,9,[20,54,34,67,[11,12,13]]]]]
+
+const flattenArray = unflattenedArray.flat(Infinity);
+
+console.log(flattenArray)
   
+class Cache{
   
+    constructor (){
+      this.store = new Map();
+    }
+    
+    set(key, value){
+      this.store.set(key, {value});
+    }
+    
+    get(key){
+      const cached = this.store.get(key);
+      if(!cached) return undefined;
+      
+      const {value} = cached;
+      
+      return value;
+    }
+  }
+  
+  const cache = new Cache();
+  
+  cache.set("user", {name: "rakesh", department: "developement"});
+  
+  console.log(cache.get("user"));
 
 export { result,test, getAge };
+
+
+const string  = "rakesh";
+  console.log(string.slice(1))
+
+function reverseString(string){
+  if(string.length<=1) return string;
+
+  return reverseString(string.slice(1))+ string[0];
+}
+
+console.log(reverseString(string));
